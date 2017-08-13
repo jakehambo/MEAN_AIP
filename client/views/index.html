@@ -8,19 +8,20 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-
-      <!-- Meetups View -->
+      <!-- Movie View -->
       <div ng-controller="meetupsController">
-        <h1>There are {{meetups.length}} meetups</h1>
+        <h1>Movie Recommendation</h1>
         <ul>
-          <li ng-repeat="meetup in meetups">
-            {{meetup.name}}
+          <li ng-repeat="meetup in movies">
+            {{meetup.title}}
           </li>
         </ul>
         <h2></h2>
         <form ng-submit="createMeetup()">
           <input type="text" placeholder="Meetup name" ng-model="meetupName"></input>
-          <button type="submit">Add</button>
+          <br>
+          <br>
+          <button type="submit">Update</button>
         </form>
       </div>
 

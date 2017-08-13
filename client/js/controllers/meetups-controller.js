@@ -1,17 +1,17 @@
 app.controller('meetupsController', ['$scope', '$resource', function ($scope, $resource) {
-  var Meetup = $resource('/api/meetups');
+  var Movie = $resource('/api/movies');
 
-  Meetup.query(function (results) {
-    $scope.meetups = results;
+  Movie.query(function (results) {
+    $scope.movies = results;
   });
 
-  $scope.meetups = []
+  $scope.movies = []
 
   $scope.createMeetup = function () {
-    var meetup = new Meetup();
-    meetup.name = $scope.meetupName;
-    meetup.$save(function (result) {
-      $scope.meetups.push(result);
+    var movie = new Movie();
+    movie.title = $scope.meetupName;
+    movie.$save(function (result) {
+      $scope.movies.push(result);
       $scope.meetupName = '';
     });
   }
