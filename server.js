@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 app.get('/moviesaip', function (req, res) {
-  console.log('I received a GET request');
+  console.log('GET request');
 
   db.moviesaip.find(function (err, docs) {
     console.log(docs);
