@@ -1,23 +1,27 @@
-// MEAN Stack RESTful API Tutorial - Contact List App
 
+//Variables to include express, mongo and to declare the mongo db name
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('moviesaip', ['moviesaip']);
 var bodyParser = require('body-parser');
 
+//Showing where the views are
 app.use(express.static(__dirname + '/public'));
+
+//Including the json file for packages
 app.use(bodyParser.json());
 
+//REST METHOD function called get to call function in controller to display data
 app.get('/moviesaip', function (req, res) {
   console.log('GET request');
-
   db.moviesaip.find(function (err, docs) {
     console.log(docs);
     res.json(docs);
   });
 });
 
+//REST METHOD function called POST to add the data in the database
 app.post('/moviesaip', function (req, res) {
   console.log(req.body);
   db.moviesaip.insert(req.body, function(err, doc) {
@@ -25,6 +29,7 @@ app.post('/moviesaip', function (req, res) {
   });
 });
 
+//REST METHOD function to delete the entry in the database
 app.delete('/moviesaip/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
@@ -33,6 +38,7 @@ app.delete('/moviesaip/:id', function (req, res) {
   });
 });
 
+//REST METHOD function to get a single entry of the data to be put in form
 app.get('/moviesaip/:id', function (req, res) {
   var id = req.params.id;
   console.log(id);
@@ -41,6 +47,7 @@ app.get('/moviesaip/:id', function (req, res) {
   });
 });
 
+//REST METHOD function to update a field in the database when user clicks edit
 app.put('/moviesaip/:id', function (req, res) {
   var id = req.params.id;
   console.log(req.body.title);
@@ -53,5 +60,6 @@ app.put('/moviesaip/:id', function (req, res) {
   );
 });
 
+//Server message when it is running and the port number
 app.listen(3000);
 console.log("Server running on port 3000");
