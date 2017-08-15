@@ -13,7 +13,7 @@ var refresh = function() {
 
 refresh();
 
-$scope.addContact = function() {
+$scope.addMovie = function() {
   console.log($scope.movie);
   $http.post('/moviesaip', $scope.movie).success(function(response) {
     console.log(response);
