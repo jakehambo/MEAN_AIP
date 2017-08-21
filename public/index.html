@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-  <title>Movie Application</title>
+  <title>Walk Application</title>
 </head>
 <body>
   <div class="container" ng-controller="AppCtrl">
@@ -26,23 +26,23 @@
       </thead>
       <tbody>
         <tr>
-          <td><input class="form-control" ng-model="movie.title"></td>
-          <td><input class="form-control" ng-model="movie.releasedate"></td>
-          <td><input class="form-control" ng-model="movie.duration"></td>
-          <td><input class="form-control" ng-model="movie.genre"></td>
-          <td><input class="form-control" ng-model="movie.synopsis"></td>
-          <td><button class="btn btn-primary" ng-click="addMovie()">Add Movie</button></td>
-          <td><button class="btn btn-info" ng-click="update()">Update Movie</button>&nbsp;&nbsp;<br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+          <td><input class="form-control" ng-model="walk.title"></td>
+          <td><input class="form-control" ng-model="walk.releasedate"></td>
+          <td><input class="form-control" ng-model="walk.duration"></td>
+          <td><input class="form-control" ng-model="walk.genre"></td>
+          <td><input class="form-control" ng-model="walk.synopsis"></td>
+          <td><button class="btn btn-primary" ng-click="addwalk()">Add Walk</button></td>
+          <td><button class="btn btn-info" ng-click="update()">Update Walk</button>&nbsp;&nbsp;<br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
 
-        <tr ng-repeat="movie in moviesaip">
-          <td>{{movie.title}}</td>
-          <td>{{movie.releasedate}}</td>
-          <td>{{movie.duration}}</td>
-          <td>{{movie.genre}}</td>
-          <td>{{movie.synopsis}}</td>
-          <td><button class="btn btn-danger" ng-click="remove(movie._id)">Remove</button></td>
-          <td><button class="btn btn-warning" ng-click="edit(movie._id)">Edit</button></td>
+        <tr ng-repeat="walk in walksaip">
+          <td>{{walk.title}}</td>
+          <td>{{walk.releasedate}}</td>
+          <td>{{walk.duration}}</td>
+          <td>{{walk.genre}}</td>
+          <td>{{walk.synopsis}}</td>
+          <td><button class="btn btn-danger" ng-click="remove(walk._id)">Remove</button></td>
+          <td><button class="btn btn-warning" ng-click="edit(walk._id)">Edit</button></td>
         </tr>
       </tbody>
     </table>
