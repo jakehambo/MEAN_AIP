@@ -1,5 +1,5 @@
-var myApp = angular.module('myApp', []);
-myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
+var myBushWalkApp = angular.module('myBushWalkApp', []);
+myBushWalkApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     console.log("Controller started...");
 
 //Refresh the table

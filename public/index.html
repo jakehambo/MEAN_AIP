@@ -1,36 +1,25 @@
 <!DOCTYPE>
-<html ng-app="myApp">
+<html ng-app="myBushWalkApp">
 <head>
 
-<!--Adding bootstrap for styling-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-<!--Adding a bootstrap theme-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
   <title>Movie Application</title>
-
-  <style>
-  #popupContainer {
-    position: relative;
-  }
-  </style>
 </head>
-
-
 <body>
   <div class="container" ng-controller="AppCtrl">
-    <h1>Movie Recommendation</h1>
+    <h1>Bush Walk Repository</h1>
 
-<!--Table for the form to input data-->
     <table class="table">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Release Date</th>
-          <th>Duration</th>
-          <th>Genre</th>
-          <th>Synopsis</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Difficulty</th>
+          <th>Tips</th>
+          <th>Description</th>
           <th>Action</th>
           <th>&nbsp;</th>
         </tr>
@@ -42,11 +31,10 @@
           <td><input class="form-control" ng-model="movie.duration"></td>
           <td><input class="form-control" ng-model="movie.genre"></td>
           <td><input class="form-control" ng-model="movie.synopsis"></td>
-          <td><button class="btn btn-primary" ng-click="addMovie(); showAlert($event)">Add Movie</button></td>
+          <td><button class="btn btn-primary" ng-click="addMovie()">Add Movie</button></td>
           <td><button class="btn btn-info" ng-click="update()">Update Movie</button>&nbsp;&nbsp;<br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
 
-<!--Table to display the data in the database-->
         <tr ng-repeat="movie in moviesaip">
           <td>{{movie.title}}</td>
           <td>{{movie.releasedate}}</td>
@@ -58,9 +46,8 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
-<!--Including angular and controller-->
+  </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
 <script src="controllers/controller.js"></script>
 </body>
