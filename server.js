@@ -61,5 +61,6 @@ app.put('/moviesaip/:id', function (req, res) {
 });
 
 //Server message when it is running and the port number
-app.listen(3000);
-console.log("Server running on port 3000");
+var port = 8000;
+app.listen(port);
+console.log("Server running on port "+port);
