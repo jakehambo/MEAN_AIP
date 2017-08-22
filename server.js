@@ -53,7 +53,7 @@ app.put('/walksaip/:id', function (req, res) {
   console.log(req.body.title);
   db.walksaip.findAndModify({
     query: {_id: mongojs.ObjectId(id)},
-    update: {$set: {title: req.body.title, releasedate: req.body.releasedate, duration: req.body.duration, genre: req.body.genre, synopsis: req.body.synopsis}},
+    update: {$set: {name: req.body.name, location: req.body.location, difficulty: req.body.difficulty, tips: req.body.tips, description: req.body.description}},
     new: true}, function (err, doc) {
       res.json(doc);
     }
