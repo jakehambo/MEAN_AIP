@@ -1,19 +1,12 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html ng-app="myBushWalkApp">
-
-<head>
-
+  <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
   <title>Walk Application</title>
-</head>
 
-<body>
   <div class="container" ng-controller="AppCtrl">
     <h1>Bush Walk Repository</h1>
-
     <table class="table">
       <thead>
         <tr>
@@ -39,10 +32,10 @@
               </select></td>
           <td><input class="form-control" ng-model="walk.tips"></td>
           <td><input class="form-control" ng-model="walk.description"></td>
-          <td><button class="btn btn-primary" ng-click="addwalk()">Add Walk</button></td>
-          <td><button class="btn btn-info" ng-click="update()">Update Walk</button>&nbsp;&nbsp;<br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+          <td><button class="btn btn-primary" ng-click="addWalk()">Add Walk</button></td>
+          <td><button class="btn btn-info" ng-click="update()">Update Walk</button>&nbsp;&nbsp;
+              <br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
-
         <tr ng-repeat="walk in walksaip">
           <td>{{walk.name}}</td>
           <td>{{walk.location}}</td>
@@ -54,10 +47,8 @@
         </tr>
       </tbody>
     </table>
-
   </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
   <script src="controllers/controller.js"></script>
-</body>
-
 </html>
