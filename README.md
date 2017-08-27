@@ -2,7 +2,7 @@
 
 ### CODE PRINCIPLES ###
 
-1. All single line comments must be represented as '//foo' and all multi-line comments must be represented as '/**bar*/'.
+1. All single line comments must be represented as '//foo' and all multi-line comments must be represented as '/*bar*/'.
 2. If there are more than 100 characters on a single line then make a portion of that line into a new line.
 3. Do not include multiple scripting/programming languages in the same file, put them in separate files and include the 
 file in the relevant file.
