@@ -7,12 +7,15 @@
 
   <div class="container" ng-controller="AppCtrl">
     <h1>Bush Walk Repository</h1>
+    <a href="login.html">Sign in</a>
+    <br>
+    <a href="register.html">No Account? Sign up</a>
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
           <th>Location</th>
-          <th>Difficulty</th>
+          <th>Difficulty (Grade Level)</th>
           <th>Tips</th>
           <th>Description</th>
           <th>Action</th>
@@ -37,7 +40,7 @@
               <br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
         <tr ng-repeat="walk in walksaip">
-          <td>{{walk.name}}</td>
+          <td><a href="walk.html">{{walk.name}}</a></td>
           <td>{{walk.location}}</td>
           <td>{{walk.difficulty}}</td>
           <td>{{walk.tips}}</td>
