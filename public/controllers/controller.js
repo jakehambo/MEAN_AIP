@@ -73,4 +73,12 @@ $scope.deselect = function () {
   $scope.walk = "";
 }
 
+//Get the info when clicked edit, using get rest method
+$scope.search = function (id) {
+  $http.get('/walksaip/' + id)
+  .success(function (response) {
+    refresh();
+  });
+};
+
 }]);﻿
