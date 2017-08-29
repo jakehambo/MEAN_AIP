@@ -47,6 +47,20 @@ app.get('/walksaip/:id', function (req, res) {
   });
 });
 
+//REST METHOD function to search the database
+app.get('/walksaip', function (req, res) {
+  db.walksaip.find({
+    name: req.query.name,
+    location: req.query.location,
+    difficulty: req.query.difficulty,
+    tips: req.query.tips,
+    description: req.query.description
+  },
+  function (err, doc) {
+    res.json(doc);
+  });
+});
+
 //REST METHOD function to update a field in the database when user clicks edit
 app.put('/walksaip/:id', function (req, res) {
   var id = req.params.id;
