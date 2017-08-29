@@ -37,7 +37,7 @@
           <td><input class="form-control" ng-model="walk.description"></td>
           <td><button class="btn btn-primary" ng-click="addWalk()">Add Walk</button></td>
           <td><button class="btn btn-info" ng-click="update()">Update Walk</button>&nbsp;&nbsp;
-              <br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
+              <br><br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
         <tr ng-repeat="walk in walksaip">
           <td><a href="walk.html">{{walk.name}}</a></td>
@@ -50,6 +50,45 @@
         </tr>
       </tbody>
     </table>
+
+  <h1>Search</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Difficulty (Grade Level)</th>
+        <th>Tips</th>
+        <th>Description</th>
+        <th>Action</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input class="form-control" ng-model="walk.nameSearch"></td>
+        <td><input class="form-control" ng-model="walk.locationSearch"></td>
+        <td><select class="form-control" ng-model="walk.difficultySearch">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select></td>
+        <td><input class="form-control" ng-model="walk.tipsSearch"></td>
+        <td><input class="form-control" ng-model="walk.descriptionSearch"></td>
+        <td><button class="btn btn-primary" ng-click="search()">Search</button></td>
+      </tr>
+      <tr>
+        <td><a href="walk.html">{{walk.nameSearch}}</a></td>
+        <td>{{walk.locationSearch}}</td>
+        <td>{{walk.difficultySearch}}</td>
+        <td>{{walk.tipsSearch}}</td>
+        <td>{{walk.descriptionSearch}}</td>
+      </tr>
+    </tbody>
+  </table>
+
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
