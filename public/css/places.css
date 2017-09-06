@@ -14,13 +14,18 @@ html, body {
 <style>
   #locationField, #controls {
     position: relative;
-    width: 480px;
+    width: 200px;
+  }
+  #box {
+    position: relative;
+    width: 60%;
+    left: 80px;
   }
   #autocomplete {
-    position: absolute;
+    position: relative;
     top: 0px;
     left: 0px;
-    width: 99%;
+    width: 150%;
   }
   .label {
     text-align: right;
