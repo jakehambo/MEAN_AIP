@@ -25,6 +25,12 @@ app.post('/walksaip', function (req, res) {
   });
 });
 
+app.post('/users', function (req, res) {
+  db.walksaip.insert(req.body, function(err, doc) {
+    res.json(doc);
+  });
+});
+
 //REST METHOD function to delete the entry in the database
 app.delete('/walksaip/:id', function (req, res) {
   var id = req.params.id;

@@ -44,6 +44,13 @@ $scope.addWalk = function () {
   });
 };
 
+$scope.addUser = function () {
+  $http.post('/users', $scope.user)
+  .success(function (response) {
+    refresh();
+  });
+};
+
 //Remove the walk, using
 $scope.remove = function (id) {
   $http.delete('/walksaip/' + id)
