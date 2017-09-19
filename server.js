@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('walksaip', ['walksaip']);
+var dbUser = mongojs('walksaip', ['users']);
 var bodyParser = require('body-parser');
 
 //Showing where the views are
@@ -26,7 +27,7 @@ app.post('/walksaip', function (req, res) {
 });
 
 app.post('/users', function (req, res) {
-  db.walksaip.insert(req.body, function(err, doc) {
+  dbUser.users.insert(req.body, function(err, doc) {
     res.json(doc);
   });
 });

@@ -45,7 +45,7 @@ $scope.addWalk = function () {
 };
 
 $scope.addUser = function () {
-  $http.post('/users', $scope.user)
+  $http.post('/users', $scope.users)
   .success(function (response) {
     refresh();
   });
