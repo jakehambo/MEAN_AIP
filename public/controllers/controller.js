@@ -36,14 +36,6 @@ $scope.showAlert = function (ev) {
   );
  };
 
-//Add the walk
-$scope.addWalk = function () {
-  $http.post('/walksaip', $scope.walk)
-  .success(function (response) {
-    refresh();
-  });
-};
-
 $scope.addUser = function () {
   $http.post('/users', $scope.users)
   .success(function (response) {

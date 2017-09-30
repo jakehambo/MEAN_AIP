@@ -1,16 +1,40 @@
+require('rootpath')();
+
 //Variables to include express, mongo and to declare the mongo db name
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('walksaip', ['walksaip']);
-var dbUser = mongojs('walksaip', ['users']);
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var expressJwt = require('express-jwt');
+var config = require('config.json');
 
 //Showing where the views are
 app.use(express.static(__dirname + '/public'));
 
-//Including the json file for packages
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
+
+// use JWT auth to secure the api
+app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+
+// routes
+app.use('/login', require('./controllers/login.controller'));
+app.use('/register', require('./controllers/register.controller'));
+app.use('/app', require('./controllers/app.controller'));
+app.use('/api/users', require('./controllers/api/users.controller'));
+
+
+
+// make '/app' default route
+app.get('/', function (req, res) {
+    return res.redirect('/app');
+});
 
 //REST METHOD function called get to call function in controller to display data
 app.get('/walksaip', function (req, res) {
@@ -22,12 +46,6 @@ app.get('/walksaip', function (req, res) {
 //REST METHOD function called POST to add the data in the database
 app.post('/walksaip', function (req, res) {
   db.walksaip.insert(req.body, function(err, doc) {
-    res.json(doc);
-  });
-});
-
-app.post('/users', function (req, res) {
-  dbUser.users.insert(req.body, function(err, doc) {
     res.json(doc);
   });
 });
