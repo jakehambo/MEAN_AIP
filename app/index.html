@@ -9,9 +9,11 @@
 </head>
 <body class="container">
     <!-- header -->
+    <a href="walks/index.html">WALKS</a>
     <header>
         <ul class="nav nav-tabs">
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
+            <!--<li ng-class="{active: activeTab === 'walks'}"><a ui-sref="walks">Walks</a></li>-->
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
             <li><a href="/login" target="_self">Logout</a></li>
         </ul>
@@ -36,6 +38,7 @@
     <script src="app-services/user.service.js"></script>
     <script src="app-services/flash.service.js"></script>
     <script src="home/index.controller.js"></script>
+    <script src="walks/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
 </body>
 </html>

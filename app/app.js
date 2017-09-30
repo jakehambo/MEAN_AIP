@@ -18,6 +18,12 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'home' }
             })
+            .state('walks', {
+                url: '/walks',
+                templateUrl: 'walks/index.html',
+                controller: 'index.controller.js',
+                data: { activeTab: 'walks' }
+            })
             .state('account', {
                 url: '/account',
                 templateUrl: 'account/index.html',
