@@ -37,12 +37,13 @@ $scope.showAlert = function (ev) {
   );
  };
 
-$scope.addUser = function () {
-  $http.post('/users', $scope.users)
-  .success(function (response) {
-    refresh();
-  });
-};
+ //Add the walk
+ $scope.addWalk = function () {
+   $http.post('/walksaip', $scope.walk)
+   .success(function (response) {
+     refresh();
+   });
+ };
 
 //Remove the walk, using
 $scope.remove = function (id) {

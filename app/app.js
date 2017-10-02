@@ -11,19 +11,6 @@
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
-            .state('home', {
-                url: '/',
-                templateUrl: 'home/index.html',
-                controller: 'Home.IndexController',
-                controllerAs: 'vm',
-                data: { activeTab: 'home' }
-            })
-            .state('walks', {
-                url: '/walks',
-                templateUrl: 'walks/index.html',
-                controller: 'index.controller.js',
-                data: { activeTab: 'walks' }
-            })
             .state('account', {
                 url: '/account',
                 templateUrl: 'account/index.html',
