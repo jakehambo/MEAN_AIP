@@ -11,6 +11,8 @@
     <h1>Bush Walk Repository</h1>
     <a href="settings.html">Account Settings</a>
     <br>
+    <a href="search.html">Search</a>
+    <br>
     <table class="table">
       <thead>
         <tr>
@@ -86,45 +88,6 @@
           id="country" disabled="true"></input></td>
   </tr>
 </table>
-
-
-  <h1>Search</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Location</th>
-        <th>Difficulty (Grade Level)</th>
-        <th>Tips</th>
-        <th>Description</th>
-        <th>Action</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><input class="form-control" ng-model="walk.nameSearch"></td>
-        <td><input class="form-control" ng-model="walk.locationSearch"></td>
-        <td><select class="form-control" ng-model="walk.difficultySearch">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select></td>
-        <td><input class="form-control" ng-model="walk.tipsSearch"></td>
-        <td><input class="form-control" ng-model="walk.descriptionSearch"></td>
-        <td><button class="btn btn-primary" ng-click="search()">Search</button></td>
-      </tr>
-      <tr>
-        <td><a href="walk.html">{{walk.nameSearch}}</a></td>
-        <td>{{walk.locationSearch}}</td>
-        <td>{{walk.difficultySearch}}</td>
-        <td>{{walk.tipsSearch}}</td>
-        <td>{{walk.descriptionSearch}}</td>
-      </tr>
-    </tbody>
-  </table>
 
   </div>
 
