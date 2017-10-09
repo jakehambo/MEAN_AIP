@@ -23,25 +23,12 @@ $scope.open = function () {
   });
 };
 
-//Shows alert when walk is updated
-$scope.showAlert = function (ev) {
-  $mdDialog.show(
-    $mdDialog.alert()
-      .parent(angular.element(document.querySelector('#popupContainer')))
-      .clickOutsideToClose(true)
-      .title('Updated walk') //title of alert
-      .textContent('You can specify some description text in here.')
-      .ariaLabel('walk Recommendation') //label of alert
-      .ok('Okay') //button for alert
-      .targetEvent(ev)
-  );
- };
-
  //Add the walk
  $scope.addWalk = function () {
    $http.post('/walksaip', $scope.walk)
    .success(function (response) {
      refresh();
+     alert('Walk ' + $scope.walk.name + ' has been added');
    });
  };
 

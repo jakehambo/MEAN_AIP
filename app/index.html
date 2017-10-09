@@ -11,83 +11,42 @@
     <h1>Bush Walk Repository</h1>
     <a href="settings.html">Account Settings</a>
     <br>
-    <a href="search.html">Search</a>
     <br>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Difficulty (Grade Level)</th>
-          <th>Tips</th>
-          <th>Description</th>
-          <th>Action</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input class="form-control" ng-model="walk.name"></td>
-          <td><div id="locationField">
-            <input id="autocomplete" ng-model="walk.location" class="form-control" placeholder="Enter location"
-                   onFocus="geolocate()" type="text"></input>
-          </div></td>
-          <td><div id="box"><select style="width:50%;left:100px;" class="form-control" ng-model="walk.difficulty">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select></div></td>
-          <td><input class="form-control" ng-model="walk.tips"></td>
-          <td><input class="form-control" ng-model="walk.description"></td>
-          <td><button class="btn btn-primary" ng-click="addWalk()">Add Walk</button></td>
-          <td><button class="btn btn-info" ng-click="update()">Update Walk</button>&nbsp;&nbsp;
-              <br><br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
-        </tr>
-        <tr ng-repeat="walk in walksaip">
-          <td><a href="walk.html">{{walk.name}}</a></td>
-          <td>{{walk.location}}</td>
-          <td>{{walk.difficulty}}</td>
-          <td>{{walk.tips}}</td>
-          <td>{{walk.description}}</td>
-          <td><button class="btn btn-danger" ng-click="remove(walk._id)">Remove</button></td>
-          <td><button class="btn btn-warning" ng-click="edit(walk._id)">Edit</button></td>
-        </tr>
-      </tbody>
-    </table>
+    <br>
 
-    <table id="address">
-  <tr>
-    <td class="label">Street address</td>
-    <td class="slimField"><input class="field" id="street_number"
-          disabled="true"></input></td>
-    <td class="wideField" colspan="2"><input class="field" id="route"
-          disabled="true"></input></td>
-  </tr>
-  <tr>
-    <td class="label">City</td>
-    <!-- Note: Selection of address components in this example is typical.
-         You may need to adjust it for the locations relevant to your app. See
-         https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
-    -->
-    <td class="wideField" colspan="3"><input class="field" id="locality"
-          disabled="true"></input></td>
-  </tr>
-  <tr>
-    <td class="label">State</td>
-    <td class="slimField"><input class="field"
-          id="administrative_area_level_1" disabled="true"></input></td>
-    <td class="label">Zip code</td>
-    <td class="wideField"><input class="field" id="postal_code"
-          disabled="true"></input></td>
-  </tr>
-  <tr>
-    <td class="label">Country</td>
-    <td class="wideField" colspan="3"><input class="field"
-          id="country" disabled="true"></input></td>
-  </tr>
-</table>
+  <h1>All Walks (Public)</h1>
+  <h2>Search</h2>
+  <label>Any: <br> <input class="form-control" ng-model="walk.$"></label> <br>
+  <label>Name: <br><input class="form-control" ng-model="walk.name"></label><br>
+  <label>Difficulty: <br><input class="form-control" ng-model="walk.difficulty"></label><br>
+  <br>
+  <br>
+  <br>
+
+  <h2>Search Results</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Difficulty (Grade Level)</th>
+        <th>Tips</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <tr ng-repeat="walk in walksaip | filter:walk:strict">
+        <td><a href="walk.html">{{walk.name}}</a></td>
+        <td>{{walk.location}}</td>
+        <td>{{walk.difficulty}}</td>
+        <td>{{walk.tips}}</td>
+        <td>{{walk.description}}</td>
+      </tr>
+    </tr>
+    </tbody>
+  </table>
 
   </div>
 
