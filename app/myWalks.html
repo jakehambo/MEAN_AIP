@@ -11,9 +11,11 @@
     <h1>Bush Walk Repository</h1>
     <a href="settings.html">Account Settings</a>
     <br>
-    <h1>Admin</h1>
-    <h2>Search</h2>
-    <label>User: <br> <input class="form-control" ng-model="walk.user"></label> <br>
+    <a href="index.html">Home</a>
+    <br>
+    <a href="addWalk.html">Add Walk</a>
+    <br>
+    <h1>My Walks</h1>
     <br>
     <br>
     <br>
@@ -26,7 +28,6 @@
           <th>Difficulty (Grade Level)</th>
           <th>Tips</th>
           <th>Description</th>
-          <th>User</th>
           <th>Action</th>
           <th>&nbsp;</th>
         </tr>
@@ -47,11 +48,10 @@
               </select></div></td>
           <td><input class="form-control" ng-model="walk.tips"></td>
           <td><input class="form-control" ng-model="walk.description"></td>
-          <td><button class="btn btn-primary" ng-click="addWalk()">Add Walk</button></td>
           <td><button class="btn btn-info" ng-click="update()">Update Walk</button>&nbsp;&nbsp;
               <br><br><button class="btn btn-info" ng-click="deselect()">Clear</button></td>
         </tr>
-        <tr ng-repeat="walk in walksaip | filter:walk:strict">
+        <tr ng-repeat="walk in walksaip">
           <td><a href="walk.html">{{walk.name}}</a></td>
           <td>{{walk.location}}</td>
           <td>{{walk.difficulty}}</td>
