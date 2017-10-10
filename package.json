@@ -12,6 +12,7 @@
     "express-jwt": "^3.0.1",
     "express-session": "^1.11.3",
     "jsonwebtoken": "^5.0.2",
+    "email-verification": "^0.4.6",
     "lodash": "^3.10.0",
     "mongodb": "^2.1.16",
     "mongoskin": "^2.1.0",
