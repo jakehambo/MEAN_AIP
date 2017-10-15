@@ -1,9 +1,10 @@
-﻿var config = require('config.json');
+var config = require('config.json');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var Q = require('q');
 var mongo = require('mongoskin');
+var secret = "$2b$10$/3OqCt2shs.jf07yz6LRsO4MYkIggrBByC9W4qugQHK4fken0FSGK";
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('admins');
 
@@ -20,7 +21,7 @@ module.exports = service;
 function authenticate(username, password) {
     var deferred = Q.defer();
 
-    db.admin.findOne({ username: username }, function (err, admin) {
+    db.admins.findOne({ username: username }, function (err, admin) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (admin && bcrypt.compareSync(password, admin.hash)) {
@@ -53,30 +54,29 @@ function getById(_id) {
     return deferred.promise;
 }
 
-function create(userParam) {
+function create(adminParam) {
     var deferred = Q.defer();
-    var adminName = 'admin';
 
     // validation
     db.admins.findOne(
-        { username: adminName },
+        { username: adminParam.username },
         function (err, admin) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
             if (admin) {
                 // username already exists
-                deferred.reject('Username "' + adminName + '" is already taken');
+                deferred.reject('Username "' + adminParam.username + '" is already taken');
             } else {
                 createUser();
             }
         });
 
     function createUser() {
-        // set admin object to userParam without the cleartext password
-        var admin = _.omit(userParam, 'password');
-        var password = 'admin';
+        // set admin object to adminParam without the cleartext password
+        var admin = _.omit(adminParam, 'password');
+
         // add hashed password to admin object
-        admin.hash = bcrypt.hashSync(password, 10);
+        admin.hash = bcrypt.hashSync(adminParam.password, 10);
 
         db.admins.insert(
             admin,
@@ -86,6 +86,72 @@ function create(userParam) {
                 deferred.resolve();
             });
     }
+
+    return deferred.promise;
+}
+
+function update(_id, adminParam) {
+    var deferred = Q.defer();
+
+    // validation
+    db.admins.findById(_id, function (err, admin) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+
+        if (admin.username !== adminParam.username) {
+            // username has changed so check if the new username is already taken
+            db.admins.findOne(
+                { username: adminParam.username },
+                function (err, admin) {
+                    if (err) deferred.reject(err.name + ': ' + err.message);
+
+                    if (admin) {
+                        // username already exists
+                        deferred.reject('Username "' + req.body.username + '" is already taken')
+                    } else {
+                        updateUser();
+                    }
+                });
+        } else {
+            updateUser();
+        }
+    });
+
+    function updateUser() {
+        // fields to update
+        var set = {
+            firstName: adminParam.firstName,
+            lastName: adminParam.lastName,
+            username: adminParam.username,
+        };
+
+        // update password if it was entered
+        if (adminParam.password) {
+            set.hash = bcrypt.hashSync(adminParam.password, 10);
+        }
+
+        db.admins.update(
+            { _id: mongo.helper.toObjectID(_id) },
+            { $set: set },
+            function (err, doc) {
+                if (err) deferred.reject(err.name + ': ' + err.message);
+
+                deferred.resolve();
+            });
+    }
+
+    return deferred.promise;
+}
+
+function _delete(_id) {
+    var deferred = Q.defer();
+
+    db.admins.remove(
+        { _id: mongo.helper.toObjectID(_id) },
+        function (err) {
+            if (err) deferred.reject(err.name + ': ' + err.message);
+
+            deferred.resolve();
+        });
 
     return deferred.promise;
 }
