@@ -66,7 +66,18 @@ function create(userParam) {
                 // username already exists
                 deferred.reject('Username "' + userParam.username + '" is already taken');
             } else {
+              if (userParam.type != 'user') {
+                var hash = bcrypt.hashSync(userParam.secret, 10);
+                if (bcrypt.compareSync(userParam.secret, hash)) {
                 createUser();
+              }
+              else {
+                deferred.reject('Secret does not match');
+              }
+              }
+              else {
+                  createUser();
+              }
             }
         });
 

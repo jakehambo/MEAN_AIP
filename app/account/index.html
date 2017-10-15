@@ -1,4 +1,7 @@
 ﻿<h1>My Account</h1>
+<div ng-if="vm.user.type === 'admin'">
+  <h2><a href="admin.html">Admin Options</a></h2>
+</div>
 <div class="form-container">
     <form method="post">
         <div class="form-group">

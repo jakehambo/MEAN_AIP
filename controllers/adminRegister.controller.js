@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
     // register using api to maintain clean separation between layers
     request.post({
-        url: config.apiUrl + '/admins/register',
+        url: config.apiUrl + '/users/register',
         form: req.body,
         json: true
     }, function (error, response, body) {
@@ -23,13 +23,14 @@ router.post('/', function (req, res) {
                 error: response.body,
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
-                username: req.body.username
+                username: req.body.username,
+                type: req.body.type
             });
         }
 
         // return to login page with success message
         req.session.success = 'Registration successful';
-        return res.redirect('/adminLogin');
+        return res.redirect('/login');
     });
 });
 

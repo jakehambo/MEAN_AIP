@@ -17,27 +17,17 @@ app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
 
 // use JWT auth to secure the api
-app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register', '/api/admins/authenticate', '/api/admins/register'] }));
-
-//app.use(express.static(__dirname + '/public'));
-
+app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
 // routes
 app.use('/login', require('./controllers/login.controller'));
-app.use('/adminLogin', require('./controllers/adminLogin.controller'));
 app.use('/register', require('./controllers/register.controller'));
 app.use('/adminRegister', require('./controllers/adminRegister.controller'));
 app.use('/app', require('./controllers/app.controller'));
-app.use('/appAdmin', require('./controllers/appAdmin.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
-app.use('/api/admins', require('./controllers/api/admins.controller'));
 
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
-});
-
-app.get('/admin', function (req, res) {
-    return res.redirect('/appAdmin');
 });
 
 //REST METHOD function called get to call function in controller to display data
