@@ -2,9 +2,6 @@
 
 ### CODE PRINCIPLES ###
 
-$2b$10$/3OqCt2shs.jf07yz6LRsO4MYkIggrBByC9W4qugQHK4fken0FSGK //ADMIN SECRET
-
-
 1. All single line comments must be represented as '//foo' and all multi-line comments must be represented as '/*bar*/'.
 2. If there are more than 100 characters on a single line then make a portion of that line into a new line.
 3. Do not include multiple scripting/programming languages in the same file, put them in separate files and include the
@@ -23,3 +20,10 @@ need to be on the same line.
 13. Arrays can be on the same line or it can be an optional block like style with every array element on a new line.
 14. Code in brackets should not be viewed as ( element ), no spaces are allowed in the brackets, it must be represented as (element).
 15. Code will be indented using tabs not spaces.
+
+### REFERENCES ###
+LOGIN
+http://jasonwatmore.com/post/2015/12/09/mean-stack-user-registration-and-login-example-tutorial
+
+Web service
+https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
