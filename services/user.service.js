@@ -1,25 +1,35 @@
 /*
 User service file to:
+- assign a json web token
+- encrypt passwords
+- connect to the mongodb database
 - authenticate the user
 - get a single user by id
+- create a user
+- update a user
+- delete a user
 */
 
-//Global variables for libraries and db
+//global variables for libraries and db
 var config = require('config.json');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var Q = require('q');
 var mongo = require('mongoskin');
-var db = mongo.db(config.connectionString, { native_parser: true });
 
-//Declare the db collection
+//get the mongo db path, path is found in config file
+var db = mongo.db(config.connectionString, {
+  native_parser: true
+});
+
+//declare the db collection
 db.bind('users');
 
-//Service schema to assign service fields to functions so it can be used in app
+//service schema to assign service fields to functions so it can be used in app
 var service = {};
 
-//Assign the service fields to the functions
+//assign the service fields to the functions
 service.authenticate = authenticate;
 service.getById = getById;
 service.create = create;
@@ -28,9 +38,15 @@ service.delete = _delete;
 
 module.exports = service;
 
+/*
+Authenticate the user by gathering the username and password and comparing
+the password with the bcrypt algorithm
+used in the login process
+*/
 function authenticate(username, password) {
     var deferred = Q.defer();
 
+    //mongodb function to find a single entry in db collection
     db.users.findOne({
       username: username
     }, function (err, user) {
@@ -50,9 +66,13 @@ function authenticate(username, password) {
     return deferred.promise;
 }
 
+/*
+Get the user based on id, used to get logged in user
+*/
 function getById(_id) {
     var deferred = Q.defer();
 
+    //mongodb function to return a row based on object id
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
@@ -68,19 +88,26 @@ function getById(_id) {
     return deferred.promise;
 }
 
+/*
+Function to create a user, used in register
+*/
 function create(userParam) {
     var deferred = Q.defer();
 
     // validation
     db.users.findOne(
-        { username: userParam.username },
+        {
+          username: userParam.username
+        },
         function (err, user) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
             if (user) {
-                // username already exists
-                deferred.reject('Username "' + userParam.username + '" is already taken');
+                //username already exists
+                deferred.reject('Username "' + userParam.username
+                + '" is already taken');
             } else {
+              //compare the secret with the one that was inputted
               if (userParam.type != 'user') {
                 var hash = bcrypt.hashSync(userParam.secret, 10);
                 if (bcrypt.compareSync(userParam.secret, hash)) {
@@ -103,6 +130,7 @@ function create(userParam) {
         // add hashed password to user object
         user.hash = bcrypt.hashSync(userParam.password, 10);
 
+        //add the user to the databse
         db.users.insert(
             user,
             function (err, doc) {
@@ -115,13 +143,17 @@ function create(userParam) {
     return deferred.promise;
 }
 
+/*
+Function to update, used when user has to update credentials
+*/
 function update(_id, userParam) {
     var deferred = Q.defer();
 
-    // validation
+    //find user in mongodb based on id
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
+        //check to make sure the user doesnt update someone else
         if (user.username !== userParam.username) {
             db.users.findOne(
                 {
@@ -130,13 +162,12 @@ function update(_id, userParam) {
                 function (err, user) {
                     if (err) deferred.reject(err.name + ': ' + err.message);
 
-                    //Check if the username exists
+                    //check if the username exists
                     if (user) {
-                        //Show message in form if username is taken
+                        //show message in form if username is taken
                         deferred.reject('Username "' + req.body.username
                         + '" is already taken')
                     } else {
-                        //Update the user if
                         updateUser();
                     }
                 });
@@ -150,19 +181,19 @@ function update(_id, userParam) {
     update data such as firstname, lastname, username and password
     */
     function updateUser() {
-        //Add a schema to update the user fields in the databse
+        //add a schema to update the user fields in the databse
         var set = {
             firstName: userParam.firstName,
             lastName: userParam.lastName,
             username: userParam.username,
         };
 
-        //Hash the new password if the user enters the password
+        //hash the new password if the user enters the password
         if (userParam.password) {
             set.hash = bcrypt.hashSync(userParam.password, 10);
         }
 
-        //Update the user with mongo function the certain parameters based on id
+        //update the user with mongo function the certain parameters based on id
         db.users.update(
             {
               _id: mongo.helper.toObjectID(_id)
@@ -171,7 +202,7 @@ function update(_id, userParam) {
               $set: set
             },
 
-            //Return an error if it could not be updated successfully
+            //return an error if it could not be updated successfully
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
 
@@ -189,13 +220,13 @@ Takes the user id
 function _delete(_id) {
     var deferred = Q.defer();
 
-    //Mongodb function to remove the user based on id
+    //mongodb function to remove the user based on id
     db.users.remove(
         {
           _id: mongo.helper.toObjectID(_id)
         },
 
-        //Display an error if the user could not be deleted
+        //display an error if the user could not be deleted
         function (err) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
