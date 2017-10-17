@@ -1,3 +1,8 @@
+/*
+App Controller file to:
+- Authenticate the user's session
+- Server the main application
+*/
 ﻿var express = require('express');
 var router = express.Router();
 

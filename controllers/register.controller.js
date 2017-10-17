@@ -1,4 +1,8 @@
-﻿var express = require('express');
+/*
+User Register Controller file to:
+- register users
+*/
+var express = require('express');
 var router = express.Router();
 var request = require('request');
 var config = require('config.json');
@@ -8,7 +12,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    // register using api to maintain clean separation between layers
+    // Register
     request.post({
         url: config.apiUrl + '/users/register',
         form: req.body,

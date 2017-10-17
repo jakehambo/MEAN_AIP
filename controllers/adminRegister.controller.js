@@ -1,3 +1,7 @@
+/*
+Admin Controller file to:
+- register admin
+*/
 var express = require('express');
 var router = express.Router();
 var request = require('request');

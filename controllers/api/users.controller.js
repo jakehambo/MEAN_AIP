@@ -1,4 +1,8 @@
-﻿var config = require('config.json');
+/*
+User Controller file to:
+- register admin
+*/
+var config = require('config.json');
 var express = require('express');
 var router = express.Router();
 var userService = require('services/user.service');
@@ -28,6 +32,7 @@ function authenticateUser(req, res) {
         });
 }
 
+//Function to register user
 function registerUser(req, res) {
     userService.create(req.body)
         .then(function () {
@@ -38,6 +43,7 @@ function registerUser(req, res) {
         });
 }
 
+//Returns the logged in user
 function getCurrentUser(req, res) {
     userService.getById(req.user.sub)
         .then(function (user) {
@@ -52,6 +58,7 @@ function getCurrentUser(req, res) {
         });
 }
 
+//Update the user
 function updateUser(req, res) {
     var userId = req.user.sub;
     if (req.params._id !== userId) {
@@ -68,6 +75,7 @@ function updateUser(req, res) {
         });
 }
 
+//Deletes the user
 function deleteUser(req, res) {
     var userId = req.user.sub;
     if (req.params._id !== userId) {
