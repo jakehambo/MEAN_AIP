@@ -1,7 +1,8 @@
 /*
 The server file to
+- set views and encrypt the api
 - declare routes and assign those routes to controllers
-- Express services to create update, delete and edit bushwalks
+- Express services to create, update, delete and edit bushwalks
 */
 require('rootpath')();
 
