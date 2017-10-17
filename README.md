@@ -31,7 +31,7 @@ http://localhost:8000/walksaip/{id}
 3. Do not include multiple scripting/programming languages in the same file, put them in separate files and include the
 file in the relevant file.
 4. Code must not be commented out. It must be removed.
-5. Every unit of code must have a comment.
+5. Every complex unit of code must be commented, it is optional to comment every unit.
 6. Variable names and method/function names must be named appropriately. The names must be meaningful.
 7. Add debug logs where necessary. Do not include these logs in every function.
 8. No duplicate code is allowed. Put the code in a function or method and reuse it.
