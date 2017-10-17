@@ -1,4 +1,6 @@
 # MEAN_AIP #
+http://104.196.255.79
+http://vinshcki.net
 
 ### PUBLIC API INFO ###
 ***GET***
