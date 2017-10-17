@@ -2,6 +2,18 @@
 http://104.196.255.79
 http://vinshcki.net
 
+### DEPLOYMENT ###
+
+1. Clone the repo
+
+2. npm install forever -g
+
+3. Run npm install from the root of the response
+
+4. Start mongoDB using mongod (if installed gloablly)
+
+5. Run npm start
+
 ### PUBLIC API INFO ###
 ***GET***
 
