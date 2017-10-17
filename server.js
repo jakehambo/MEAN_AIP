@@ -1,4 +1,10 @@
+/*
+The server file to
+- declare routes and assign those routes to controllers
+- Express services to create update, delete and edit bushwalks
+*/
 require('rootpath')();
+
 //Variables to include express, mongo and to declare the mongo db name
 var express = require('express');
 var app = express();
@@ -10,22 +16,40 @@ var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
 
+//Declare the view engine for login and register
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
 
-// use JWT auth to secure the api
-app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
-// routes
+//Set the view path
+app.set('views', __dirname + '/views');
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+//Parser to parse JSON format
+app.use(bodyParser.json());
+
+//Initialise a session once user is logged in
+app.use(session({
+  secret: config.secret,
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Use a json token to encrypt the api so users cannot access data
+app.use('/api', expressJwt({
+  secret: config.secret
+}).unless({
+  path: ['/api/users/authenticate', '/api/users/register']
+}));
+
+//Routes with controllers assigned to them
 app.use('/login', require('./controllers/login.controller'));
 app.use('/register', require('./controllers/register.controller'));
 app.use('/adminRegister', require('./controllers/adminRegister.controller'));
 app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 
-// make '/app' default route
+// The default root will be set to the app folder
 app.get('/', function (req, res) {
     return res.redirect('/app');
 });
@@ -89,6 +113,6 @@ app.put('/walksaip/:id', function (req, res) {
 });
 
 //Server message when it is running and the port number
-var port = 8000; //port number
+var port = 8000;
 app.listen(port);
 console.log("Server running on port " + port);
