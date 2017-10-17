@@ -1,4 +1,9 @@
-﻿(function () {
+/*
+Account Controller file to:
+- Save user
+- Delete user
+*/
+(function () {
     'use strict';
 
     angular
@@ -22,6 +27,7 @@
         }
 
         function saveUser() {
+            //Save User
             UserService.Update(vm.user)
                 .then(function () {
                     FlashService.Success('User updated');

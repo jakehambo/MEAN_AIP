@@ -1,4 +1,8 @@
-
+/*
+Controller file to:
+- Manage the application
+  - Calls CRUD functions and updates the table
+*/
 var myBushWalkApp = angular.module('myBushWalkApp', []);
 
 //The main controller function

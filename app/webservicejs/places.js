@@ -1,5 +1,8 @@
-
-
+/*
+Places service file to:
+- Manages the google places api
+(Referenced in the README)
+*/
 var placeSearch, autocomplete;
 var componentForm = {
   street_number: 'short_name',
