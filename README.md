@@ -2,6 +2,7 @@
 
 ### PUBLIC API INFO ###
 ***GET***
+
 Get all walks
 http://localhost:8000/walksaip
 
@@ -9,14 +10,17 @@ Get one walk
 http://localhost:8000/walksaip/{id}
 
 ***POST***
+
 Add a walksaip
 http://localhost:8000/{walk.body} (walk.body = stores all fields in form)
 
 ***PUT***
+
 Update a walk
 http://localhost:8000/walksaip/{id}
 
 ***DELETE***
+
 Delete a walk
 http://localhost:8000/walksaip/{id}
 
